@@ -61,4 +61,4 @@ Use the new probe.dll that is created
 - I plan to implement the Efficiently Updatable part of NNUE in the near future as well as clear documentation on how to easily implement it!
 - Move some of the code into a singular file as some of the files have only a few lines of code kept from Stockfish
 #  
-If you would like to report a bug or need help with installation/implementation, reach me at vedantjoshi1409@gmail.com 
+If you would like to report a bug or need help with installation/implementation, create a new issue or reach me at vedantjoshi1409@gmail.com!
