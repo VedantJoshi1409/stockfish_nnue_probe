@@ -2,9 +2,9 @@
 
 ## What is it?
 
-A library for probing Stockfish's NNUEs. The code for reading parameters and the forward propagation is taken from Stockfish with modifications to allow for easy access. Currently supports C and Java!
+A library for probing Stockfish's NNUEs. The code for reading parameters and the forward propagation is taken from Stockfish with modifications to allow for easy access. Currently supports C++ and Java!
 
-## C Usage Guide
+## C++ Usage Guide
 At engine start up, run ```init(const char *bigNetName, const char *smallNetName)```\
 For evaluation, run ```eval(const int pieceBoard[], bool side, int rule50)```
 
@@ -41,7 +41,7 @@ Latest supported big network is **nn-b1a57edbea57.nnue** \
 Latest supported small network is **nn-baff1ede1f90.nnue**\
 Both are needed!
 
-## C Installation Guide
+## C++ Installation Guide
 
 Download everything except for the NNUEBridge files and probe.dll. Put them in your source directory. The probing functions are in probe.cpp. 
 
