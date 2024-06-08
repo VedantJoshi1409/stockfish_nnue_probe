@@ -49,7 +49,7 @@ Download everything except for the NNUEBridge files and probe.dll. Put them in y
 
 Download probe.dll and NNUEBridge.java, and put them both in your source directory. The probing functions are in NNUEBridge.java.
 
-If you need to recompile the shared library due to putting the file in a bridge or something similar, install all files and put NNUEBridge.java where you would like it to be
+If you need to recompile the shared library due to putting the file in a package or something similar, install all files and put NNUEBridge.java where you would like it to be
 
 Run ```javac -h . NNUEBridge.java```  \
 Change all function headers in NNUEBridge.cpp to match the ones created in NNUEBridge.h\
