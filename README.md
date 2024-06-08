@@ -62,4 +62,5 @@ Use the new probe.dll that is created
 - Move some of the code into a singular file as some of the files have only a few lines of code kept from Stockfish
 
 
+
 If you need help or would like to report a bug, reach me at vedantjoshi1409@gmail.com 
