@@ -5,8 +5,8 @@
 A library for probing Stockfish's NNUEs. The code for reading parameters and the forward propagation is taken from Stockfish with modifications to allow for easy access. Currently supports C++ and Java!
 
 ## C++ Usage Guide
-At engine start up, run ```init(const char *bigNetName, const char *smallNetName)```\
-For evaluation, run ```eval(const int pieceBoard[], bool side, int rule50)```
+At engine start up, run ```Stockfish::Probe::init(const char *bigNetName, const char *smallNetName)```\
+For evaluation, run ```Stockfish::Probe::eval(const int pieceBoard[], bool side, int rule50)```
 
 ## Java Usage Guide
 At engine start up, run ```init(String bigNetName, String smallNetName)```\
@@ -49,10 +49,12 @@ Download everything except for the NNUEBridge files and probe.dll. Put them in y
 
 Download probe.dll and NNUEBridge.java, and put them both in your source directory. The probing functions are in NNUEBridge.java.
 
-## Shared Library Compilation Guide
-
-Install all files and run ```make -j build ARCH=x86-64-avx2 ```\
-Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nnue.o half_ka_v2_hm.o misc.o NNUEBridge.o position.o probe.o -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32```
+If you need to recompile the shared library due to putting the file in a bridge or something similar, install all files and put NNUEBridge.java where you would like it to be\
+Run ```javac -h . NNUEBridge.java```  \
+Change all function headers in NNUEBridge.cpp to match the ones created in NNUEBridge.h\
+Run ```make -j build ARCH=x86-64-avx2 ```\
+Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nnue.o half_ka_v2_hm.o misc.o NNUEBridge.o position.o probe.o -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32```\
+Use the new probe.dll that is created
 
 ## Future plans
 I plan to implement the Efficiently Updatable part of NNUE in the near future as well as clear documentation on how to easily implement it!
