@@ -2,7 +2,7 @@
 
 ## What is it?
 
-A library for probing Stockfish's NNUEs. The code for reading parameters and the forward propagation is taken from Stockfish with modifications to allow for easy access. Currently supports C++ and Java!
+A library for probing [Stockfish's NNUEs](https://stockfishchess.org/blog/2020/introducing-nnue-evaluation/). The code for reading parameters and the forward propagation is taken from [Stockfish](https://github.com/official-stockfish/Stockfish) with modifications to allow for easy access. Currently supports C++ and Java!
 
 ## C++ Usage Guide
 At engine start up, run ```Stockfish::Probe::init(const char *bigNetName, const char *smallNetName)```\
