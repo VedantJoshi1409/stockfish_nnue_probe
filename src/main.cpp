@@ -18,30 +18,25 @@
 
 #include <iostream>
 
-#include "bitboard.h"
-#include "evaluate.h"
-#include "misc.h"
-#include "position.h"
-//#include "tune.h"
-#include "types.h"
-//#include "uci.h"
+#include "probe.h"
 
 using namespace Stockfish;
 
-int main(int argc, char* argv[]) {
+int main() {
+    Probe::init("nn-b1a57edbea57.nnue", "nn-baff1ede1f90.nnue");
 
-    std::cout << engine_info() << std::endl;
+    std::cout<<"Fen Eval: "<<Probe::eval("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")<<std::endl;
 
-    Bitboards::init();
-    Position::init();
+    int pieceBoard[] = {4, 2, 3, 5, 6, 3, 2, 4,
+                        1, 1, 1, 1, 1, 1, 1, 1,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0, 0, 0, 0,
+                        9, 9, 9, 9, 9, 9, 9, 9,
+                        12, 10, 11, 13, 14, 11, 10, 12};
+    std::cout<<"Pos Eval: "<<Probe::eval(pieceBoard, true, 0)<<std::endl;
 
-//    UCI uci(argc, argv);
-//
-//    Tune::init(uci.options);
-//
-//    uci.evalFiles = Eval::NNUE::load_networks(uci.workingDirectory(), uci.options, uci.evalFiles);
-//
-//    uci.loop();
-
+    std::cin.get();
     return 0;
 }

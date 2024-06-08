@@ -13,15 +13,23 @@ extern "C" {
  * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_NNUEBridge_init
-  (JNIEnv *, jclass, jstring, jstring, jstring);
+  (JNIEnv *, jclass, jstring, jstring);
 
 /*
  * Class:     NNUEBridge
- * Method:    eval
+ * Method:    evalFen
  * Signature: (Ljava/lang/String;)I
  */
-JNIEXPORT jint JNICALL Java_NNUEBridge_eval
+JNIEXPORT jint JNICALL Java_NNUEBridge_evalFen
   (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     NNUEBridge
+ * Method:    evalArray
+ * Signature: ([III)I
+ */
+JNIEXPORT jint JNICALL Java_NNUEBridge_evalArray
+  (JNIEnv *, jclass, jintArray, jint, jint);
 
 #ifdef __cplusplus
 }

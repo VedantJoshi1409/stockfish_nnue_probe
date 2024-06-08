@@ -114,22 +114,6 @@ enum Color {
     COLOR_NB = 2
 };
 
-enum CastlingRights {
-    NO_CASTLING,
-    WHITE_OO,
-    WHITE_OOO = WHITE_OO << 1,
-    BLACK_OO  = WHITE_OO << 2,
-    BLACK_OOO = WHITE_OO << 3,
-
-    KING_SIDE      = WHITE_OO | BLACK_OO,
-    QUEEN_SIDE     = WHITE_OOO | BLACK_OOO,
-    WHITE_CASTLING = WHITE_OO | WHITE_OOO,
-    BLACK_CASTLING = BLACK_OO | BLACK_OOO,
-    ANY_CASTLING   = WHITE_CASTLING | BLACK_CASTLING,
-
-    CASTLING_RIGHT_NB = 16
-};
-
 enum Bound {
     BOUND_NONE,
     BOUND_UPPER,
@@ -296,10 +280,6 @@ constexpr Square flip_file(Square s) { return Square(s ^ SQ_H1); }
 // Swap color of piece B_KNIGHT <-> W_KNIGHT
 constexpr Piece operator~(Piece pc) { return Piece(pc ^ 8); }
 
-constexpr CastlingRights operator&(Color c, CastlingRights cr) {
-    return CastlingRights((c == WHITE ? WHITE_CASTLING : BLACK_CASTLING) & cr);
-}
-
 constexpr Value mate_in(int ply) { return VALUE_MATE - ply; }
 
 constexpr Value mated_in(int ply) { return -VALUE_MATE + ply; }
@@ -326,83 +306,6 @@ constexpr Square relative_square(Color c, Square s) { return Square(s ^ (c * 56)
 constexpr Rank relative_rank(Color c, Rank r) { return Rank(r ^ (c * 7)); }
 
 constexpr Rank relative_rank(Color c, Square s) { return relative_rank(c, rank_of(s)); }
-
-constexpr Direction pawn_push(Color c) { return c == WHITE ? NORTH : SOUTH; }
-
-
-// Based on a congruential pseudo-random number generator
-constexpr Key make_key(uint64_t seed) {
-    return seed * 6364136223846793005ULL + 1442695040888963407ULL;
-}
-
-
-enum MoveType {
-    NORMAL,
-    PROMOTION  = 1 << 14,
-    EN_PASSANT = 2 << 14,
-    CASTLING   = 3 << 14
-};
-
-// A move needs 16 bits to be stored
-//
-// bit  0- 5: destination square (from 0 to 63)
-// bit  6-11: origin square (from 0 to 63)
-// bit 12-13: promotion piece type - 2 (from KNIGHT-2 to QUEEN-2)
-// bit 14-15: special move flag: promotion (1), en passant (2), castling (3)
-// NOTE: en passant bit is set only when a pawn can be captured
-//
-// Special cases are Move::none() and Move::null(). We can sneak these in because in
-// any normal move destination square is always different from origin square
-// while Move::none() and Move::null() have the same origin and destination square.
-class Move {
-   public:
-    Move() = default;
-    constexpr explicit Move(std::uint16_t d) :
-        data(d) {}
-
-    constexpr Move(Square from, Square to) :
-        data((from << 6) + to) {}
-
-    template<MoveType T>
-    static constexpr Move make(Square from, Square to, PieceType pt = KNIGHT) {
-        return Move(T + ((pt - KNIGHT) << 12) + (from << 6) + to);
-    }
-
-    constexpr Square from_sq() const {
-        assert(is_ok());
-        return Square((data >> 6) & 0x3F);
-    }
-
-    constexpr Square to_sq() const {
-        assert(is_ok());
-        return Square(data & 0x3F);
-    }
-
-    constexpr int from_to() const { return data & 0xFFF; }
-
-    constexpr MoveType type_of() const { return MoveType(data & (3 << 14)); }
-
-    constexpr PieceType promotion_type() const { return PieceType(((data >> 12) & 3) + KNIGHT); }
-
-    constexpr bool is_ok() const { return none().data != data && null().data != data; }
-
-    static constexpr Move null() { return Move(65); }
-    static constexpr Move none() { return Move(0); }
-
-    constexpr bool operator==(const Move& m) const { return data == m.data; }
-    constexpr bool operator!=(const Move& m) const { return data != m.data; }
-
-    constexpr explicit operator bool() const { return data != 0; }
-
-    constexpr std::uint16_t raw() const { return data; }
-
-    struct MoveHash {
-        std::size_t operator()(const Move& m) const { return make_key(m.data); }
-    };
-
-   protected:
-    std::uint16_t data;
-};
 
 }  // namespace Stockfish
 

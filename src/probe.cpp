@@ -2,24 +2,21 @@
 #include "bitboard.h"
 #include "position.h"
 #include "evaluate.h"
-#include "misc.h"
-#include "types.h"
 #include "nnue/nnue_architecture.h"
 
 namespace Stockfish {
 
     namespace Probe {
 
-        void init(const char *workingDirectory, const char *bigNetFile, const char *smallNetFile) {
+        void init( const char *bigNetFile, const char *smallNetFile) {
             Bitboards::init();
-            Position::init();
 
             std::unordered_map<Eval::NNUE::NetSize, Eval::EvalFile> evalFiles = {
                     {Eval::NNUE::Big,   {"EvalFile",      bigNetFile,   "None", ""}},
                     {Eval::NNUE::Small, {"EvalFileSmall", smallNetFile, "None", ""}}
             };
 
-            evalFiles = Eval::NNUE::load_networks(workingDirectory, evalFiles);
+            evalFiles = Eval::NNUE::load_networks("", evalFiles);
 
             for (auto &[netSize, evalFile]: evalFiles) {
                 std::cout << "Option: " << evalFile.optionName << std::endl; // Print other members similarly
@@ -32,8 +29,17 @@ namespace Stockfish {
             Position pos;
             StateListPtr states(new std::deque<StateInfo>(1));
 
-            pos.set(fen, false, &states->back());
+            pos.set(fen, &states->back());
+            int eval = Eval::evaluate(pos);
 
+            return eval;
+        }
+
+        int eval(const int pieceBoard[], bool side, int rule50) {
+            Position pos;
+            StateListPtr states(new std::deque<StateInfo>(1));
+
+            pos.set(pieceBoard, side, rule50, &states->back());
             int eval = Eval::evaluate(pos);
 
             return eval;

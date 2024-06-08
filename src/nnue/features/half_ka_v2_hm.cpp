@@ -39,6 +39,7 @@ template<Color Perspective>
 void HalfKAv2_hm::append_active_indices(const Position& pos, IndexList& active) {
     Square   ksq = pos.square<KING>(Perspective);
     Bitboard bb  = pos.pieces();
+
     while (bb)
     {
         Square s = pop_lsb(bb);

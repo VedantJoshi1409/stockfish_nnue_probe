@@ -3,9 +3,10 @@
 
 namespace Stockfish {
     namespace Probe {
-        void init(const char*, const char*, const char*);
+        void init(const char*, const char*);
 
         int eval(const char *fen);
+        int eval(const int pieceBoard[], bool side, int rule50);
     }
 }
 
