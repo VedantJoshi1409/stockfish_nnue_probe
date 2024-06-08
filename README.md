@@ -43,7 +43,7 @@ Both are needed!
 
 ## C++ Installation Guide
 
-Download everything except for the NNUEBridge files and probe.dll. Put them in your source directory. The probing functions are in probe.cpp. 
+Download everything except for the NNUEBridge files, main.cpp, and probe.dll. Put them in your source directory. The probing functions are in probe.cpp. 
 
 ## Java Installation Guide
 
@@ -58,4 +58,6 @@ Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nn
 Use the new probe.dll that is created
 
 ## Future plans
-I plan to implement the Efficiently Updatable part of NNUE in the near future as well as clear documentation on how to easily implement it!
+- I plan to implement the Efficiently Updatable part of NNUE in the near future as well as clear documentation on how to easily implement it!
+- Move some of the code into a singular file as some of the files have only a few lines of code kept from Stockfish
+
