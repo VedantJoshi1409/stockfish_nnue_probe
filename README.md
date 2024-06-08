@@ -53,3 +53,6 @@ Download probe.dll and NNUEBridge.java, and put them both in your source directo
 
 Install all files and run ```make -j build ARCH=x86-64-avx2 ```\
 Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nnue.o half_ka_v2_hm.o misc.o NNUEBridge.o position.o probe.o -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32```
+
+## Future plans
+I plan to implement the Efficiently Updatable part of NNUE in the near future as well as clear documentation on how to easily implement it!
