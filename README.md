@@ -30,9 +30,9 @@ For evaluation, run ```evalArray(int[] pieceBoard, int side, int rule50)```
 - 14 for black king
 
 **side** is 0 for white and 1 for black\
-**rule50** is the value of the halfmove clock, should be between 0 and 100
+**rule50** is the value of the halfmove clock, which should be between 0 and 100
 
-Examples of function usage is in main.cpp
+Examples of function usage are in main.cpp
 ## NNUE Installation Guide
 
 Install the nets from the [Stockfish Testing Framework](https://tests.stockfishchess.org/nns) and put them inside your source directory.
@@ -49,7 +49,8 @@ Download everything except for the NNUEBridge files and probe.dll. Put them in y
 
 Download probe.dll and NNUEBridge.java, and put them both in your source directory. The probing functions are in NNUEBridge.java.
 
-If you need to recompile the shared library due to putting the file in a bridge or something similar, install all files and put NNUEBridge.java where you would like it to be\
+If you need to recompile the shared library due to putting the file in a bridge or something similar, install all files and put NNUEBridge.java where you would like it to be
+
 Run ```javac -h . NNUEBridge.java```  \
 Change all function headers in NNUEBridge.cpp to match the ones created in NNUEBridge.h\
 Run ```make -j build ARCH=x86-64-avx2 ```\
