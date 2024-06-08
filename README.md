@@ -30,7 +30,7 @@ For evaluation, run ```evalArray(int[] pieceBoard, int side, int rule50)```
 - 14 for black king
 
 **side** is 0 for white and 1 for black\
-**rule50** is the value of the halfmove clock, should be between 0 and 100\
+**rule50** is the value of the halfmove clock, should be between 0 and 100
 
 Examples of function usage is in main.cpp
 ## NNUE Installation Guide
