@@ -40,3 +40,20 @@ JNIEXPORT jint JNICALL Java_NNUEBridge_evalArray
 
     return eval;
 }
+
+JNIEXPORT jint JNICALL Java_NNUEBridge_fasterEvalArray
+        (JNIEnv * env, jclass this_class, jintArray pieces, jintArray squares,
+         jint pieceAmount, jint side, jint rule50) {
+    jint *c_pieces = (jint*)env->GetPrimitiveArrayCritical(pieces, 0);
+    jint *c_squares = (jint*)env->GetPrimitiveArrayCritical(squares, 0);
+    int c_pieceAmount = (int) pieceAmount;
+    bool c_side = side == 0;
+    int c_rule50 = (int) rule50;
+
+    int eval = Probe::eval((int*)c_pieces, (int*)c_squares, c_pieceAmount, c_side, c_rule50);
+
+    env->ReleasePrimitiveArrayCritical(pieces, c_pieces, 0);
+    env->ReleasePrimitiveArrayCritical(squares, c_squares, 0);
+
+    return eval;
+}

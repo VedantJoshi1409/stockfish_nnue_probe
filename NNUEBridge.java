@@ -11,4 +11,6 @@ public class NNUEBridge {
     public static native int evalFen(String fen);
 
     public static native int evalArray(int[] pieceBoard, int side, int rule50);
+
+    public static native int fasterEvalArray(int[] pieces, int[] squares, int pieceAmount, int side, int rule50);
 }

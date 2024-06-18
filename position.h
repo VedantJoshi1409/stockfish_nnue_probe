@@ -84,6 +84,7 @@ class Position {
     static void print(const Position& pos);
 
     // FEN string input/output
+    Position&   set(const int pieces[], const int squares[], int pieceAmount, bool side, int rule50, StateInfo* si);
     Position&   set(const int pieceBoard[], bool side, int rule50, StateInfo* si);
     Position&   set(const std::string& fenStr, StateInfo* si);
 

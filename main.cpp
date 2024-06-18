@@ -37,6 +37,20 @@ int main() {
                         12, 10, 11, 13, 14, 11, 10, 12};
     std::cout<<"Pos Eval: "<<Probe::eval(pieceBoard, true, 0)<<std::endl;
 
+    int pieces[] = {4, 2, 3, 5, 6, 3, 2, 4,
+                    1, 1, 1, 1, 1, 1, 1, 1,
+                    9, 9, 9, 9, 9, 9, 9, 9,
+                    12, 10, 11, 13, 14, 11, 10, 12};
+
+    int squares[] = {
+            0, 1, 2,3, 4, 5, 6, 7,
+            8, 9, 10, 11, 12, 13, 14, 15,
+            48, 49, 50, 51, 52, 53, 54, 55,
+            56, 57, 58, 59, 60, 61, 62, 63
+    };
+
+    std::cout<<"Faster Pos Eval: "<<Probe::eval(pieces, squares, 32, true, 0)<<std::endl;
+
     std::cin.get();
     return 0;
 }

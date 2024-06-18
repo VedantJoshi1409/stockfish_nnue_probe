@@ -44,5 +44,15 @@ namespace Stockfish {
 
             return eval;
         }
+
+        int eval(const int pieces[], const int squares[], int pieceAmount, bool side, int rule50) {
+            Position pos;
+            StateListPtr states(new std::deque<StateInfo>(1));
+
+            pos.set(pieces, squares, pieceAmount, side, rule50, &states->back());
+            int eval = Eval::evaluate(pos);
+
+            return eval;
+        }
     }
 }

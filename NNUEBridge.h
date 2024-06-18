@@ -10,7 +10,7 @@ extern "C" {
 /*
  * Class:     NNUEBridge
  * Method:    init
- * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+ * Signature: (Ljava/lang/String;Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_NNUEBridge_init
   (JNIEnv *, jclass, jstring, jstring);
@@ -30,6 +30,14 @@ JNIEXPORT jint JNICALL Java_NNUEBridge_evalFen
  */
 JNIEXPORT jint JNICALL Java_NNUEBridge_evalArray
   (JNIEnv *, jclass, jintArray, jint, jint);
+
+/*
+ * Class:     NNUEBridge
+ * Method:    fasterEvalArray
+ * Signature: ([I[IIII)I
+ */
+JNIEXPORT jint JNICALL Java_NNUEBridge_fasterEvalArray
+  (JNIEnv *, jclass, jintArray, jintArray, jint, jint, jint);
 
 #ifdef __cplusplus
 }

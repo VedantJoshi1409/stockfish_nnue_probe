@@ -81,6 +81,28 @@ Position& Position::set(const int pieceBoard[], bool side, int rule50, StateInfo
     return *this;
 }
 
+Position& Position::set(const int pieces[], const int squares[], int pieceAmount, bool side, int rule50, StateInfo* si) {
+
+    std::memset(this, 0, sizeof(Position));
+    std::memset(si, 0, sizeof(StateInfo));
+    st = si;
+
+    st->nonPawnMaterial[WHITE] = st->nonPawnMaterial[BLACK] = VALUE_ZERO;
+    st->rule50 = rule50;
+
+    for (int i = 0; i < pieceAmount; i++) {
+        Piece pc = Piece(pieces[i]);
+        put_piece(pc, Square(squares[i]));
+        if (type_of(pc) != PAWN && type_of(pc) != KING) {
+            st->nonPawnMaterial[color_of(pc)] += PieceValue[pc];
+        }
+    }
+
+    sideToMove = side ? WHITE : BLACK;
+
+    return *this;
+}
+
 // Initializes the position object with the given FEN string.
 // This function is not very robust - make sure that input FENs are correct,
 // this is assumed to be the responsibility of the GUI.
