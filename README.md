@@ -1,3 +1,4 @@
+
 # stockfish_nnue_probe
 
 ## What is it?
@@ -6,14 +7,21 @@ A library for probing [Stockfish's NNUEs](https://stockfishchess.org/blog/2020/i
 
 ## C++ Usage Guide
 At engine start up, run ```Stockfish::Probe::init(const char *bigNetName, const char *smallNetName)```\
-For evaluation, run ```Stockfish::Probe::eval(const int pieceBoard[], bool side, int rule50)```
+For evaluation, run:\
+```Stockfish::Probe::eval(const int pieceBoard[], bool side, int rule50)```\
+ or the faster version:\
+  ```Stockfish::Probe::eval(const int pieces[], const int squares[], int pieceAmount, bool side, int rule50)```
 
 ## Java Usage Guide
 At engine start up, run ```init(String bigNetName, String smallNetName)```\
-For evaluation, run ```evalArray(int[] pieceBoard, int side, int rule50)```
+For evaluation, run:\
+```evalArray(int[] pieceBoard, int side, int rule50)```\
+or the faster version:\
+```fasterEvalArray(int[] pieces, int[] squares, int pieceAmount, int side, int rule50)``` 
 
 ## Function Parameter Explanation 
 
+### ```int eval(const int pieceBoard[], bool side, int rule50)```
 **pieceBoard** is an array of size 64, where index 0 is mapped to A1, index 1 is mapped to B1, and index 63 is mapped to H8. The value in each index is 
 - 0 for no piece
 - 1 for white pawn
@@ -32,7 +40,17 @@ For evaluation, run ```evalArray(int[] pieceBoard, int side, int rule50)```
 **side** is 0 for white and 1 for black\
 **rule50** is the value of the halfmove clock, which should be between 0 and 100
 
-Examples of function usage are in main.cpp
+### ```int eval(const int pieces[], const int squares[], int pieceAmount, bool side, int rule50)```
+**pieces** is an array of size 32 where the first pieceAmount indexes are set to a piece value\
+**squares** is an array of size 32 where each  of the first pieceAmount indexes are the square that the piece in the pieces array are on
+
+Ex. pieces[0] is 6 and squares[0] is 4 to represent a white king on e1\
+The order that the pieces and squares do not matter, as long as the 2 arrays match each other\
+Piece and square mapping is the same as the above method\
+
+**pieceAmount** is the amount of pieces on the board
+
+Examples of both function usage are in main.cpp
 ## NNUE Installation Guide
 
 Install the nets from the [Stockfish Testing Framework](https://tests.stockfishchess.org/nns) and put them inside your source directory.
@@ -58,7 +76,7 @@ Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nn
 Use the new probe.dll that is created
 
 ## Future plans
-- I plan to implement the Efficiently Updatable part of NNUE in the near future as well as clear documentation on how to easily implement it!
+- I plan to implement the Efficiently Updatable part of NNUE in the future as well as clear documentation on how to easily implement it!
 - Move some of the code into a singular file as some of the files have only a few lines of code kept from Stockfish
 #  
 If you would like to report a bug or need help with installation/implementation, create a new issue or reach me at vedantjoshi1409@gmail.com!
