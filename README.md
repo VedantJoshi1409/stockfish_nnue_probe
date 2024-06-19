@@ -46,7 +46,7 @@ or the faster version:\
 
 Ex. pieces[0] is 6 and squares[0] is 4 to represent a white king on e1\
 The order that the pieces and squares do not matter, as long as the 2 arrays match each other\
-Piece and square mapping is the same as the above method\
+Piece and square mapping is the same as the above method
 
 **pieceAmount** is the amount of pieces on the board
 
