@@ -70,11 +70,13 @@ Download probe.dll and the NNUEBridge folder, and put them both in your source d
 
 If you need to recompile the shared library due to putting the file in a package or something similar, install all files and put NNUEBridge.java where you would like it to be
 
-Run ```javac -h . NNUEBridge.java```  \
-Change all function headers in NNUEBridge.cpp to match the ones created in NNUEBridge.h\
-Run ```make -j build ARCH=x86-64-avx2 ```\
-Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nnue.o half_ka_v2_hm.o misc.o NNUEBridge_NNUEBridge.o position.o probe.o -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32```\
-Use the new probe.dll that is created
+- Run ```javac -h . NNUEBridge.java```
+- Replace the NNUEBridge_NNUEBridge.h file with the new path_to_new_NNUEBridge.h
+- Change all function headers in NNUEBridge_NNUEBridge.cpp to match the ones created in path_to_new_NNUEBridge.h and rename the cpp file to match as well
+- Change the SRCS and HEADERS lists in the Makefile to match the new names
+- Run ```make -j build ARCH=x86-64-avx2 ```
+- Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nnue.o half_ka_v2_hm.o misc.o path_to_new_NNUEBridge.o position.o probe.o -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32```
+- Use the new probe.dll that is created
 
 ## Future plans
 - I plan to implement the Efficiently Updatable part of NNUE in the future as well as clear documentation on how to easily implement it!
