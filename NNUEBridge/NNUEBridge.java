@@ -1,3 +1,5 @@
+package NNUEBridge;
+
 import java.io.File;
 
 public class NNUEBridge {
