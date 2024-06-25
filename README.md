@@ -71,7 +71,7 @@ Download probe.dll and the NNUEBridge folder, and put them both in your source d
 If you need to recompile the shared library due to putting the file in a package or something similar, install all files and put NNUEBridge.java where you would like it to be
 
 - Run ```javac -h . NNUEBridge.java```
-- Replace the NNUEBridge_NNUEBridge.h file with the new path_to_new_NNUEBridge.h
+- Replace the NNUEBridge_NNUEBridge.h file with the created file, path_to_new_NNUEBridge.h
 - Change all function headers in NNUEBridge_NNUEBridge.cpp to match the ones created in path_to_new_NNUEBridge.h and rename the cpp file to match as well
 - Change the SRCS and HEADERS lists in the Makefile to match the new names
 - Run ```make -j build ARCH=x86-64-avx2 ```
