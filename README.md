@@ -13,11 +13,12 @@ For evaluation, run:\
   ```Stockfish::Probe::eval(const int pieces[], const int squares[], int pieceAmount, bool side, int rule50)```
 
 ## Java Usage Guide
-At engine start up, run ```init(String bigNetName, String smallNetName)```\
+Import the file from the package using ```import NNUEBridge.NNUEBridge```\
+At engine start up, run ```NNUEBridge.init(String bigNetName, String smallNetName)```\
 For evaluation, run:\
-```evalArray(int[] pieceBoard, int side, int rule50)```\
+```NNUEBridge.evalArray(int[] pieceBoard, int side, int rule50)```\
 or the faster version:\
-```fasterEvalArray(int[] pieces, int[] squares, int pieceAmount, int side, int rule50)``` 
+```NNUEBridge.fasterEvalArray(int[] pieces, int[] squares, int pieceAmount, int side, int rule50)``` 
 
 ## Function Parameter Explanation 
 
@@ -61,18 +62,18 @@ Both are needed!
 
 ## C++ Installation Guide
 
-Download everything except for the NNUEBridge files, main.cpp, and probe.dll. Put them in your source directory. The probing functions are in probe.cpp. 
+Download everything except for the NNUEBridge folder and files, main.cpp, and probe.dll. Put them in your source directory. The probing functions are in probe.cpp. 
 
 ## Java Installation Guide
 
-Download probe.dll and NNUEBridge.java, and put them both in your source directory. The probing functions are in NNUEBridge.java.
+Download probe.dll and the NNUEBridge folder, and put them both in your source directory. The probing functions are in NNUEBridge/NNUEBridge.java.
 
 If you need to recompile the shared library due to putting the file in a package or something similar, install all files and put NNUEBridge.java where you would like it to be
 
 Run ```javac -h . NNUEBridge.java```  \
 Change all function headers in NNUEBridge.cpp to match the ones created in NNUEBridge.h\
 Run ```make -j build ARCH=x86-64-avx2 ```\
-Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nnue.o half_ka_v2_hm.o misc.o NNUEBridge.o position.o probe.o -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32```\
+Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nnue.o half_ka_v2_hm.o misc.o NNUEBridge_NNUEBridge.o position.o probe.o -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32```\
 Use the new probe.dll that is created
 
 ## Future plans
