@@ -1,6 +1,12 @@
 
 # stockfish_nnue_probe
 
+## Significance
+
+- Used to create the strongest Java Chess engine, [JFish](https://github.com/bagaturchess/jfish)
+- Featured in [this video](https://www.youtube.com/watch?v=eilT6wpGK8s&feature=youtu.be) on the Chess Programming YouTube channel
+- When implemented into [Bagatur](https://github.com/bagaturchess/Bagatur), one of the strongest Java engines, it had a [460 elo increase](https://github.com/bagaturchess/Bagatur/issues/23#issuecomment-2191567335), compared to using the old NNUE library
+
 ## What is it?
 
 A library for probing [Stockfish's NNUEs](https://stockfishchess.org/blog/2020/introducing-nnue-evaluation/). The code for reading parameters and the forward propagation is taken from [Stockfish](https://github.com/official-stockfish/Stockfish) with modifications to allow for easy access. Currently supports C++ and Java!
