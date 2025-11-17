@@ -1,6 +1,6 @@
 /*
   Stockfish, a UCI chess playing engine derived from Glaurung 2.1
-  Copyright (C) 2004-2024 The Stockfish developers (see AUTHORS file)
+  Copyright (C) 2004-2025 The Stockfish developers (see AUTHORS file)
 
   Stockfish is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,15 +17,14 @@
 */
 
 #include <iostream>
+#include <memory>
 
 #include "probe.h"
 
 using namespace Stockfish;
 
-int main() {
-    Probe::init("nn-b1a57edbea57.nnue", "nn-baff1ede1f90.nnue");
-
-    std::cout<<"Fen Eval: "<<Probe::eval("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")<<std::endl;
+int main(int argc, char* argv[]) {
+    Probe::init("nn-49c1193b131c.nnue", "nn-37f18f62d772.nnue");
 
     int pieceBoard[] = {4, 2, 3, 5, 6, 3, 2, 4,
                         1, 1, 1, 1, 1, 1, 1, 1,
@@ -51,6 +50,11 @@ int main() {
 
     std::cout<<"Faster Pos Eval: "<<Probe::eval(pieces, squares, 32, true, 0)<<std::endl;
 
-    std::cin.get();
+    while (true) {
+      std::string fen;
+      std::getline(std::cin, fen);
+      std::cout<<"FEN Pos Eval: "<<Probe::eval(fen.c_str())<<std::endl;
+    }
+
     return 0;
 }
