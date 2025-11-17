@@ -1,11 +1,21 @@
 
 # stockfish_nnue_probe
 
+
+## Stockfish v17.1
+
+- Updated to use code from Stockfish v17.1
+- Supports the latest SFNNv10 architecture
+- Unfortunately, due to the accumulator and cache required for the inference, this version is ~300 times slower than the old version for any engine not running an accumulator and cache
+- When tested with fixed depth on my own engine, this version won 8 games, lost 2, and drew 6
+- Will be kept as a side branch for testing purposes, however for performance use the old version
+
 ## Significance
 
 - Used to create the strongest Java Chess engine, [JFish](https://github.com/bagaturchess/jfish)
 - Featured in [this video](https://www.youtube.com/watch?v=eilT6wpGK8s&feature=youtu.be) on the Chess Programming YouTube channel
 - When implemented into [Bagatur](https://github.com/bagaturchess/Bagatur), one of the strongest Java engines, it had a [460 elo increase](https://github.com/bagaturchess/Bagatur/issues/23#issuecomment-2191567335), compared to using the old NNUE library
+- Has reached 100+ users!
 
 ## What is it?
 
@@ -62,8 +72,8 @@ Examples of both function usage are in main.cpp
 
 Install the nets from the [Stockfish Testing Framework](https://tests.stockfishchess.org/nns) and put them inside your source directory.
 
-Latest supported big network is **nn-b1a57edbea57.nnue** \
-Latest supported small network is **nn-baff1ede1f90.nnue**\
+Latest supported big network is **nn-49c1193b131c.nnue** \
+Latest supported small network is **nn-37f18f62d772.nnue**\
 Both are needed!
 
 ## C++ Installation Guide
@@ -80,12 +90,9 @@ If you need to recompile the shared library due to putting the file in a package
 - Replace the NNUEBridge_NNUEBridge.h file with the created file, path_to_new_NNUEBridge.h
 - Change all function headers in NNUEBridge_NNUEBridge.cpp to match the ones created in path_to_new_NNUEBridge.h and rename the cpp file to match as well
 - Change the SRCS and HEADERS lists in the Makefile to match the new names
-- Run ```make -j build ARCH=x86-64-avx2 ```
-- Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nnue.o half_ka_v2_hm.o misc.o path_to_new_NNUEBridge.o position.o probe.o -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32```
+- Install msys2 and use the mingw terminal
+- Run ```make build ARCH=x86-64-avx2 COMP=mingw```
+- Then run ```g++ -shared -o probe.dll bitboard.o evaluate.o full_threats.o half_ka_v2_hm.o misc.o network.o nnue_accumulator.o nnue_misc.o NNUEBridge_NNUEBridge.o position.o probe.o -lpthread -Wl,--out-implib=libprobe.a -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/win32"```
 - Use the new probe.dll that is created
-
-## Future plans
-- I plan to implement the Efficiently Updatable part of NNUE in the future as well as clear documentation on how to easily implement it!
-- Move some of the code into a singular file as some of the files have only a few lines of code kept from Stockfish
 #  
 If you would like to report a bug or need help with installation/implementation, create a new issue or reach me at vedantjoshi1409@gmail.com!
