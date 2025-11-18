@@ -86,7 +86,8 @@ If you need to recompile the shared library due to putting the file in a package
 - Use the new probe.dll that is created
 
 ## Regarding Updates
-- Checkout branch sotckfish.17.1 for the updated library supporting SFNNv10
+- Checkout branch stockfish.17.1 for the updated library supporting SFNNv10
 - Performance has gone down due to not being able to use accumulators and caches in the library
+- Future plans to rewrite inference to not use an accumulator or cache however this is a rather gargantuan task
 #  
 If you would like to report a bug or need help with installation/implementation, create a new issue or reach me at vedantjoshi1409@gmail.com!
