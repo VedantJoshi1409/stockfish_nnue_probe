@@ -9,6 +9,7 @@
 - Unfortunately, due to the accumulator and cache required for the inference, this version is ~300 times slower than the old version for any engine not running an accumulator and cache
 - When tested with fixed depth on my own engine, this version won 8 games, lost 2, and drew 6
 - Will be kept as a side branch for testing purposes, however for performance use the old version
+- Future plans to rewrite inference to not use an accumulator or cache however this is a rather gargantuan task
 
 ## Significance
 
