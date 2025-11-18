@@ -6,6 +6,7 @@
 - Used to create the strongest Java Chess engine, [JFish](https://github.com/bagaturchess/jfish)
 - Featured in [this video](https://www.youtube.com/watch?v=eilT6wpGK8s&feature=youtu.be) on the Chess Programming YouTube channel
 - When implemented into [Bagatur](https://github.com/bagaturchess/Bagatur), one of the strongest Java engines, it had a [460 elo increase](https://github.com/bagaturchess/Bagatur/issues/23#issuecomment-2191567335), compared to using the old NNUE library
+- Has reached 100+ users!
 
 ## What is it?
 
@@ -84,8 +85,8 @@ If you need to recompile the shared library due to putting the file in a package
 - Then run ```g++ -lpthread -shared -o probe.dll bitboard.o evaluate.o evaluate_nnue.o half_ka_v2_hm.o misc.o path_to_new_NNUEBridge.o position.o probe.o -I${JAVA_HOME}/include -I${JAVA_HOME}/include/win32```
 - Use the new probe.dll that is created
 
-## Future plans
-- I plan to implement the Efficiently Updatable part of NNUE in the future as well as clear documentation on how to easily implement it!
-- Move some of the code into a singular file as some of the files have only a few lines of code kept from Stockfish
+## Regarding Updates
+- Checkout branch sotckfish.17.1 for the updated library supporting SFNNv10
+- Performance has gone down due to not being able to use accumulators and caches in the library
 #  
 If you would like to report a bug or need help with installation/implementation, create a new issue or reach me at vedantjoshi1409@gmail.com!
